@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NYC Mobility Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="wrap">
+        <h1>NYC Mobility Dashboard</h1>
+        <div class="toolbar">
+          <button id="refreshBttn" class="primary">Refresh</button>
+          <a id="csvLink" class="muted" href="#">Export CSV</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section class="cardFilters">
+        <div class="body">
+          <div class="filterGrid">
+            <div><label>Start Date</label><input type="date" id="start" /></div>
+            <div><label>End Date</label><input type="date" id="end" /></div>
+            <div><label>Vendor</label>
+              <select id="vendor">
+                <option value="">All</option>
+                <option value="1">Vendor 1</option>
+                <option value="2">Vendor 2</option>
+              </select>
+            </div>
+            <div><label>Passengers </label><input type="number" id="pmin" min="0" /></div>
+            <div><label>Passengers </label><input type="number" id="pmax" min="0" /></div>
+            <div><label>Hour</label><input type="number" id="hour" min="0" max="23" /></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="kpis">
+        <div class="card">
+          <div class="body">
+            <span class="label">Total trips</span>
+            <span id="kpiTrips" class="value">-</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="body">
+            <span class="label">Total Distance</span>
+            <span id="kpiDist" class="value">-</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="body">
+            <span class="label">Average Fare</span>
+            <span id="kpiFare" class="value">-</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="body">
+            <span class="label">Average Trip Time</span>
+            <span id="kpiTime" class="value">-</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="charts">
+        <div class="card">
+          <div class="body">
+            <h3>Trips Over Time</h3>
+            <canvas id="chartSeries"></canvas>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="body">
+            <h3>Trips by Borough</h3>
+            <canvas id="chartBorough"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!--MAP-->
+      <section class="card">
+        <div class="body">
+          <h3>Pickup Intensity Map</h3>
+          <div id="map"></div>
+        </div>
+      </section>
+
+      <!--TABLE-->
+      <section class="cardTableSection">
+        <div class="body">
+          <div class="toolbar">
+            <input id="search" placeholder="Search"/>
+            <button id="searchBtn">Search</button>
+          </div>
+          <table id="tripTable">
+            <thead>
+              <tr>
+                <th>Pickup Time</th>
+                <th>Dropoff Time</th>
+                <th>Passengers</th>
+                <th>Distance (km)</th>
+                <th>Fare</th>
+                <th>Pickup Borough</th>
+                <th>Dropoff Borough</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          <div class="paging">
+            <button id="prevBttn">Previous</button>
+            <span id="pageInfo"></span>
+            <button id="nextBttn">Next</button>
+
+            <select id="pageSize">
+              <option>25</option>
+              <option selected>50</option>
+              <option>100</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <footer>Copyright . 2025</footer>
+    </main>
+    
+    <script src="script.js"></script>
+  </body>
+</html>
