@@ -1,3 +1,4 @@
+-- Active: 1742803121218@@f519ae958f46.601a9382.alu-cod.online@38805 # type: ignore
 from flask import Blueprint, request, jsonify, g
 
 trip_api = Blueprint('trip_api', __name__)
